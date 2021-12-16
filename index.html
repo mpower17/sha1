@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>sha1</title>
+    <script>
+      async function sha1() {
+        const encoder = new TextEncoder('utf-8');
+        const encodedMsg = encoder.encode(document.getElementById("inp").value);
+        const buffer = await crypto.subtle.digest('SHA-1', encodedMsg);
+        const arr = Array.from(new Uint8Array(buffer));
+        const hex = arr.map(b => b.toString(16).padStart(2, '0')).join('');
+
+        document.getElementById("inp").value = hex;
+      }
+    </script>
+  </head>
+  <body>
+    <h4>mpower17</h4>
+    <input name="inp" id="inp" />
+    <button id="bt" name="bt" onclick="sha1()"></button>
+  </body>
+</html>
